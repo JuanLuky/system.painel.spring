@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Entity
 @Data
@@ -13,18 +12,20 @@ import java.util.UUID;
 public class Senha {
 
     @Id
-    @GeneratedValue
-    @Column(columnDefinition = "uuid", updatable = false, nullable = false)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "paciente_id")
     private Paciente paciente;
 
     @ManyToOne
+    @JoinColumn(name = "consultorio_id")
     private Consultorio consultorio;
 
     private boolean chamado;
 
+    @Column(name = "data_hora")
     private LocalDateTime dataHora;
 
     public Senha() {

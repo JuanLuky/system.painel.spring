@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Entity
 @Data
@@ -12,20 +11,20 @@ import java.util.UUID;
 public class Paciente {
 
     @Id
-    @GeneratedValue
-    @Column(columnDefinition = "uuid", updatable = false, nullable = false)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "paciente_id")
+    private Long id;
 
     private String nome;
 
+    private boolean prioridade; // indica se o paciente tem prioridade
+
+    @Column(name = "data_cadastro")
     private LocalDateTime dataCadastro;
 
-    private boolean chamado; // indica se já foi chamado
-
-    private String consultorio; // ex: "Consultório 01"
 
     public Paciente() {
         this.dataCadastro = LocalDateTime.now();
-        this.chamado = false;
+        this.prioridade = false;
     }
 }
