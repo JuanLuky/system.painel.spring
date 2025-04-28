@@ -28,6 +28,7 @@ public class PacienteService {
         paciente.setPrioridade(dto.prioridade());
         paciente.setDataCadastro(dto.dataCadastro());
 
+
         // Salvar o paciente no banco de dados
         Paciente pacienteSalvo = pacienteRepository.save(paciente);
         // Retornar o paciente salvo como DTO
@@ -41,5 +42,13 @@ public class PacienteService {
         return pacientes.stream()
                 .map(PacienteMapper::toDTO)
                 .collect(Collectors.toList());
+    }
+
+    public PacienteDTO buscarPaciente(Long id) {
+        // Aqui você pode adicionar a lógica para buscar o paciente pelo ID
+        Paciente paciente = pacienteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Paciente não encontrado"));
+        // Retornar o paciente encontrado como DTO
+        return PacienteMapper.toDTO(paciente);
     }
 }

@@ -1,4 +1,4 @@
-package com.hospital.system.painel.config.cors;
+package com.hospital.system.painel.cors;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.validation.Validator;
@@ -11,7 +11,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOriginPatterns("http://localhost:4200, http://localhost:5173/")
+                .allowedOriginPatterns("http://localhost:4200")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(true);  // Credenciais só podem ser permitidas para origens específicas

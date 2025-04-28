@@ -1,5 +1,6 @@
 package com.hospital.system.painel.service;
 
+import com.hospital.system.painel.config.websocket.SenhaWebSocketController;
 import com.hospital.system.painel.dto.SenhaDTO;
 import com.hospital.system.painel.entity.Consultorio;
 import com.hospital.system.painel.entity.Paciente;
@@ -20,11 +21,13 @@ public class SenhaService {
     private final SenhaRepository senhaRepository;
     private final PacienteRepository pacienteRepository;
     private final ConsultorioRepository consultorioRepository;
+    private final SenhaWebSocketController senhaWebSocketController;
 
-    public SenhaService(SenhaRepository senhaRepository, PacienteRepository pacienteRepository, ConsultorioRepository consultorioRepository) {
+    public SenhaService(SenhaRepository senhaRepository, PacienteRepository pacienteRepository, ConsultorioRepository consultorioRepository, SenhaWebSocketController senhaWebSocketController) {
         this.senhaRepository = senhaRepository;
         this.pacienteRepository = pacienteRepository;
         this.consultorioRepository = consultorioRepository;
+        this.senhaWebSocketController = senhaWebSocketController;
     }
 
     public SenhaDTO chamarPaciente(Long pacienteid)  {
@@ -50,11 +53,15 @@ public class SenhaService {
         senha.setId(senha.getId());
         senha.setPaciente(pacienteOpt.get());
         senha.setConsultorio(consultorioDisponivel.get());
-        senha.setChamado(true);
+        senha.setChamado(false);
         senha.setDataHora(LocalDateTime.now());
 
         // Salvar a senha no banco de dados
         Senha senhaSalva = senhaRepository.save(senha);
+
+        // Enviar a senha para o painel via WebSocket
+        senhaWebSocketController.enviarSenhaParaPainel(SenhaMapper.toDTO(senhaSalva));
+
         // Retornar a senha salva como DTO
         return SenhaMapper.toDTO(senhaSalva);
     }

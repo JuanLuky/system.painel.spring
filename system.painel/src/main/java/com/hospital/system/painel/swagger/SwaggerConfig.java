@@ -1,4 +1,4 @@
-package com.hospital.system.painel.config.swagger;
+package com.hospital.system.painel.swagger;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;

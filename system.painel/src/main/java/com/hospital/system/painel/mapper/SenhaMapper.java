@@ -11,7 +11,7 @@ public class SenhaMapper {
         return new SenhaDTO(
                 senha.getId(),                                // ← getter da entidade
                 senha.getPaciente().getNome(),                // ← acessa nome da entidade paciente
-                senha.getConsultorio().getNome(),             // ← idem
+                senha.getConsultorio().getNome(),
                 senha.isChamado(),
                 senha.getDataHora()
         );
