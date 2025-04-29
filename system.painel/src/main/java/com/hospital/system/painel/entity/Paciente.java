@@ -2,6 +2,7 @@ package com.hospital.system.painel.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -19,7 +20,8 @@ public class Paciente {
 
     private boolean prioridade; // indica se o paciente tem prioridade
 
-    @Column(name = "data_cadastro")
+    @CreationTimestamp
+    @Column(name = "data_cadastro", updatable = false)
     private LocalDateTime dataCadastro;
 
 

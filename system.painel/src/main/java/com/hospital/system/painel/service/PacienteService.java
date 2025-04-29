@@ -1,6 +1,7 @@
 package com.hospital.system.painel.service;
 
 
+import com.hospital.system.painel.dto.PacienteCreateDTO;
 import com.hospital.system.painel.dto.PacienteDTO;
 import com.hospital.system.painel.entity.Paciente;
 import com.hospital.system.painel.mapper.PacienteMapper;
@@ -20,14 +21,12 @@ public class PacienteService {
         this.pacienteRepository = pacienteRepository;
     }
 
-    public PacienteDTO cadastrarPaciente(PacienteDTO dto) {
+    public PacienteDTO cadastrarPaciente(PacienteCreateDTO dto) {
         // Aqui você pode adicionar a lógica para cadastrar o paciente
         Paciente paciente = new Paciente();
         paciente.setId(dto.id());
         paciente.setNome(dto.nome());
         paciente.setPrioridade(dto.prioridade());
-        paciente.setDataCadastro(dto.dataCadastro());
-
 
         // Salvar o paciente no banco de dados
         Paciente pacienteSalvo = pacienteRepository.save(paciente);

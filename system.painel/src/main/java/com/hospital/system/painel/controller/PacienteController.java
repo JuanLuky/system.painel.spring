@@ -1,5 +1,6 @@
 package com.hospital.system.painel.controller;
 
+import com.hospital.system.painel.dto.PacienteCreateDTO;
 import com.hospital.system.painel.dto.PacienteDTO;
 import com.hospital.system.painel.service.PacienteService;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class PacienteController {
     }
 
     @PostMapping
-    public ResponseEntity<PacienteDTO> cadastrarPaciente(@RequestBody PacienteDTO dto) {
+    public ResponseEntity<PacienteDTO> cadastrarPaciente(@RequestBody PacienteCreateDTO dto) {
         return ResponseEntity.ok(pacienteService.cadastrarPaciente(dto));
     }
 
