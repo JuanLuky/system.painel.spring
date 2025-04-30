@@ -37,11 +37,14 @@ public class ConsultorioService {
                 .collect(Collectors.toList());
     }
 
-    public Consultorio atualizarStatus(Long id, StatusConsultorio status) {
+    public ConsultorioDTO atualizarStatus(Long id, String status) {
         Consultorio consultorio = consultorioRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Consultório não encontrado"));
-        consultorio.setStatus(status);
-        return consultorioRepository.save(consultorio);
+
+        consultorio.setStatus(StatusConsultorio.valueOf(status)); // Enum com DISPONIVEL ou OCUPADO
+        consultorioRepository.save(consultorio);
+
+        return ConsultorioMapper.toDTO(consultorio);
     }
 
 

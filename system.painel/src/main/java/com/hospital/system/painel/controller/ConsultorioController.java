@@ -1,9 +1,8 @@
 package com.hospital.system.painel.controller;
 
+import com.hospital.system.painel.dto.AtualizarStatusConsultorioDTO;
 import com.hospital.system.painel.dto.ConsultorioDTO;
 import com.hospital.system.painel.entity.Consultorio;
-import com.hospital.system.painel.enums.StatusConsultorio;
-import com.hospital.system.painel.mapper.ConsultorioMapper;
 import com.hospital.system.painel.service.ConsultorioService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,14 +31,16 @@ public class ConsultorioController {
         return ResponseEntity.ok(consultorioService.listarConsultorios());
     }
 
-    @PatchMapping("/consultorios/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<ConsultorioDTO> atualizarStatus(
             @PathVariable Long id,
-            @RequestBody Map<String, String> body
+            @RequestBody  AtualizarStatusConsultorioDTO body
     ) {
-        String novoStatus  = body.get("status");
-        Consultorio consultorio = consultorioService.atualizarStatus(id, StatusConsultorio.valueOf(novoStatus));
-        return ResponseEntity.ok(ConsultorioMapper.toDTO(consultorio));
+//        String novoStatus = body.get("status"); // Espera "DISPONIVEL" ou "OCUPADO"
+//        ConsultorioDTO atualizado = consultorioService.atualizarStatus(id, novoStatus);
+//        return ResponseEntity.ok(atualizado);
+        ConsultorioDTO atualizado = consultorioService.atualizarStatus(id, String.valueOf(body.status()));
+        return ResponseEntity.ok(atualizado);
     }
 
 }

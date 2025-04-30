@@ -21,7 +21,7 @@ public class Consultorio {
 
 
     public Consultorio() {
-        this.status = StatusConsultorio.OCUPADO;
+
     }
 
 
