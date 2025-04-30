@@ -5,6 +5,7 @@ import com.hospital.system.painel.dto.SenhaDTO;
 import com.hospital.system.painel.entity.Consultorio;
 import com.hospital.system.painel.entity.Paciente;
 import com.hospital.system.painel.entity.Senha;
+import com.hospital.system.painel.enums.StatusConsultorio;
 import com.hospital.system.painel.mapper.SenhaMapper;
 import com.hospital.system.painel.repository.ConsultorioRepository;
 import com.hospital.system.painel.repository.PacienteRepository;
@@ -41,7 +42,7 @@ public class SenhaService {
         // buscar um consultório ativo e disponível
         List<Consultorio> consultorios = consultorioRepository.findAll();
         Optional<Consultorio> consultorioDisponivel = consultorios.stream()
-                .filter(Consultorio::isAtivo)
+                .filter(c -> c.getStatus() == StatusConsultorio.DISPONIVEL)
                 .findFirst();
 
         if(consultorioDisponivel.isEmpty()) {

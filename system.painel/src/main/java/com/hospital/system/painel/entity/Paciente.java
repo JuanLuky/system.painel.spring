@@ -27,6 +27,8 @@ public class Paciente {
 
     public Paciente() {
         this.dataCadastro = LocalDateTime.now();
+
+        // Inicializa a prioridade como falsa
         this.prioridade = false;
     }
 }

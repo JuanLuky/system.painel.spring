@@ -9,6 +9,7 @@ import com.hospital.system.painel.repository.PacienteRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -50,4 +51,10 @@ public class PacienteService {
         // Retornar o paciente encontrado como DTO
         return PacienteMapper.toDTO(paciente);
     }
+
+    public Optional<PacienteDTO> buscarProximoPaciente() {
+        return pacienteRepository.findFirstByOrderByPrioridadeDescDataCadastroAsc()
+                .map(PacienteMapper::toDTO);
+    }
+
 }
