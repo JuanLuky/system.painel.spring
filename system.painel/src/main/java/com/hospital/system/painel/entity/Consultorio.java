@@ -1,5 +1,6 @@
 package com.hospital.system.painel.entity;
 
+import com.hospital.system.painel.enums.StatusConsultorio;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -15,8 +16,13 @@ public class Consultorio {
 
     private String nome;
 
-    private boolean ativo;
+    @Enumerated(EnumType.STRING)
+    private StatusConsultorio status;
 
-    public Consultorio() {}
+
+    public Consultorio() {
+        this.status = StatusConsultorio.OCUPADO;
+    }
+
 
 }

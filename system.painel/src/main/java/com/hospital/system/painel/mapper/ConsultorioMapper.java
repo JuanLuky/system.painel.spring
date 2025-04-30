@@ -11,7 +11,7 @@ public class ConsultorioMapper {
         return new ConsultorioDTO(
                 c.getId(),
                 c.getNome(),
-                c.isAtivo()
+                c.getStatus()
         );
 
     }
