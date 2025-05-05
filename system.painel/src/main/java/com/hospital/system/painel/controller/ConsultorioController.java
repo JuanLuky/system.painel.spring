@@ -36,9 +36,6 @@ public class ConsultorioController {
             @PathVariable Long id,
             @RequestBody  AtualizarStatusConsultorioDTO body
     ) {
-//        String novoStatus = body.get("status"); // Espera "DISPONIVEL" ou "OCUPADO"
-//        ConsultorioDTO atualizado = consultorioService.atualizarStatus(id, novoStatus);
-//        return ResponseEntity.ok(atualizado);
         ConsultorioDTO atualizado = consultorioService.atualizarStatus(id, String.valueOf(body.status()));
         return ResponseEntity.ok(atualizado);
     }

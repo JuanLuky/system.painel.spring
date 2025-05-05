@@ -57,6 +57,11 @@ public class SenhaService {
         senha.setChamado(false);
         senha.setDataHora(LocalDateTime.now());
 
+        // Atualiza status do consultório para OCUPADO
+        Consultorio consultorio = consultorioDisponivel.get();
+        consultorio.setStatus(StatusConsultorio.OCUPADO);
+        consultorioRepository.save(consultorio); // <- salva a mudança de status
+
         // Salvar a senha no banco de dados
         Senha senhaSalva = senhaRepository.save(senha);
 
@@ -71,6 +76,14 @@ public class SenhaService {
         List<Senha> senhasChamadas = senhaRepository.findByChamadoTrue();
         return senhasChamadas.stream()
                 .filter(Senha::isChamado)
+                .map(SenhaMapper::toDTO)
+                .toList();
+    }
+
+    public List<SenhaDTO> listarSenhasNaochamadas() {
+        List<Senha> senhas = senhaRepository.findByChamadoFalse();
+        return senhas.stream()
+                .filter(s -> !s.isChamado())
                 .map(SenhaMapper::toDTO)
                 .toList();
     }

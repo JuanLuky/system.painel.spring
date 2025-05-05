@@ -22,8 +22,13 @@ public class SenhaController {
         return ResponseEntity.ok(senhaService.chamarPaciente(pacienteId));
     }
 
-    @GetMapping
+    @GetMapping("/listar-senhas-chamadas")
     public ResponseEntity<List<SenhaDTO>> listarChamadas() {
         return ResponseEntity.ok(senhaService.listarSenhasChamadas());
+    }
+
+    @GetMapping("/listar-senhas-nao-chamadas")
+    public  ResponseEntity<List<SenhaDTO>> listarSenhasNaoChamadas() {
+        return ResponseEntity.ok(senhaService.listarSenhasNaochamadas());
     }
 }
