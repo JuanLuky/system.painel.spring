@@ -25,20 +25,26 @@ public class PacienteController {
         return ResponseEntity.ok(pacienteService.cadastrarPaciente(dto));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<PacienteDTO> buscarPacientes(@RequestParam Long id) {
-        return ResponseEntity.ok(pacienteService.buscarPaciente(id));
-    }
+//    @GetMapping("/{id}")
+//    public ResponseEntity<PacienteDTO> buscarPacientes(@RequestParam Long id) {
+//        return ResponseEntity.ok(pacienteService.buscarPaciente(id));
+//    }
     @GetMapping
     public ResponseEntity<List<PacienteDTO>> listarPacientes() {
         return ResponseEntity.ok(pacienteService.listarPacientes());
     }
 
-    @GetMapping("/proximo")
-    public ResponseEntity<PacienteDTO> chamarProximoPaciente() {
-        Optional<PacienteDTO> proximo = pacienteService.buscarProximoPaciente();
-        return proximo.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.noContent().build());
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> excluirPaciente(@PathVariable Long id) {
+        pacienteService.excluirPacienteComSenhas(id);
+        return ResponseEntity.noContent().build();
     }
+
+//    @GetMapping("/proximo")
+//    public ResponseEntity<PacienteDTO> chamarProximoPaciente() {
+//        Optional<PacienteDTO> proximo = pacienteService.buscarProximoPaciente();
+//        return proximo.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.noContent().build());
+//    }
 
 
 }

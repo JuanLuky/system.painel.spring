@@ -5,6 +5,8 @@ import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -24,11 +26,21 @@ public class Paciente {
     @Column(name = "data_cadastro", updatable = false)
     private LocalDateTime dataCadastro;
 
+    // Relacionamento com Senha
+    @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Senha> senhas = new ArrayList<>();
+
 
     public Paciente() {
         this.dataCadastro = LocalDateTime.now();
 
         // Inicializa a prioridade como falsa
         this.prioridade = false;
+    }
+
+    // Garante que a data seja definida mesmo sem @CreationTimestamp
+    @PrePersist
+    protected void onCreate() {
+        this.dataCadastro = LocalDateTime.now();
     }
 }

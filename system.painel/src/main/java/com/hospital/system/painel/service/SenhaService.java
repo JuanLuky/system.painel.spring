@@ -54,7 +54,7 @@ public class SenhaService {
         senha.setId(senha.getId());
         senha.setPaciente(pacienteOpt.get());
         senha.setConsultorio(consultorioDisponivel.get());
-        senha.setChamado(false);
+        senha.setChamado(true);
         senha.setDataHora(LocalDateTime.now());
 
         // Atualiza status do consultório para OCUPADO
