@@ -23,7 +23,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         // Define o endpoint para conexão
         registry.addEndpoint("/ws")
-                .setAllowedOrigins("http://localhost:4200")
+                .setAllowedOrigins("http://localhost:4200, https://system-hospital.vercel.app/") // Permite o acesso do frontend
                 .withSockJS(); // Define o endpoint para conexão
     }
 
