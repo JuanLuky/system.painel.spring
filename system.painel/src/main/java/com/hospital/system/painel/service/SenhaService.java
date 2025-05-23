@@ -34,6 +34,11 @@ public class SenhaService {
     public SenhaDTO chamarPaciente(Long pacienteid)  {
 
         Optional<Paciente> pacienteOpt = pacienteRepository.findById(pacienteid);
+        boolean pacienteJaChamado = senhaRepository.existsByPacienteIdAndChamadoTrue(pacienteid);
+
+        if (pacienteJaChamado) {
+            throw new RuntimeException("Este paciente já foi chamado e está em atendimento.");
+        }
 
         if(pacienteOpt.isEmpty()) {
             throw new RuntimeException("Paciente não encontrado");
@@ -80,11 +85,11 @@ public class SenhaService {
                 .toList();
     }
 
-    public List<SenhaDTO> listarSenhasNaochamadas() {
-        List<Senha> senhas = senhaRepository.findByChamadoFalse();
-        return senhas.stream()
-                .filter(s -> !s.isChamado())
-                .map(SenhaMapper::toDTO)
-                .toList();
-    }
+//    public List<SenhaDTO> listarSenhasNaochamadas() {
+//        List<Senha> senhas = senhaRepository.findByChamadoFalse();
+//        return senhas.stream()
+//                .filter(s -> !s.isChamado())
+//                .map(SenhaMapper::toDTO)
+//                .toList();
+//    }
 }

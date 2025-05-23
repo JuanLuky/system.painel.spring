@@ -11,4 +11,7 @@ public interface SenhaRepository extends JpaRepository<Senha, Long> {
 
     // Buscar senhas ainda não chamadas (fila de espera)
     List<Senha> findByChamadoFalse();
+
+    // Verifica se existe senha chamada para o paciente
+    boolean existsByPacienteIdAndChamadoTrue(Long pacienteId);
 }
